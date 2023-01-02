@@ -2,23 +2,23 @@ version = 0.1
 [default]
 [default.pipeline_bootstrap]
 [default.pipeline_bootstrap.parameters]
-pipeline_user = "arn:aws:iam::341014156608:user/aws-sam-cli-managed-dev-meal-planner-PipelineUser-FUMQH75JMN8C"
+pipeline_user = "arn:aws:iam::341014156608:user/aws-sam-cli-managed-dev-meal-planner-PipelineUser-LRY4KAVJL72X"
 permissions_provider = "AWS IAM"
 
 [dev-meal-planner]
 [dev-meal-planner.pipeline_bootstrap]
 [dev-meal-planner.pipeline_bootstrap.parameters]
-pipeline_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-meal-PipelineExecutionRole-X66V7RDIJTFQ"
-cloudformation_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-m-CloudFormationExecutionR-16WCT49JT052D"
-artifacts_bucket = "aws-sam-cli-managed-dev-meal-plan-artifactsbucket-dinh6b8tem1a"
+pipeline_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-meal-PipelineExecutionRole-1RZKLA58YTD14"
+cloudformation_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-m-CloudFormationExecutionR-LJT4XNOA9IHP"
+artifacts_bucket = "aws-sam-cli-managed-dev-meal-plan-artifactsbucket-at57ob5xen5h"
 image_repository = ""
 region = "eu-west-1"
 
 [prod-meal-planner]
 [prod-meal-planner.pipeline_bootstrap]
 [prod-meal-planner.pipeline_bootstrap.parameters]
-pipeline_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-managed-prod-mea-PipelineExecutionRole-1SSMZBDY1QQGI"
-cloudformation_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-managed-prod-CloudFormationExecutionR-1LZX14R406QFM"
-artifacts_bucket = "aws-sam-cli-managed-prod-meal-pla-artifactsbucket-2sd9zzbjvcxp"
+pipeline_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-managed-prod-mea-PipelineExecutionRole-HT9GRU58FQVB"
+cloudformation_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-managed-prod-CloudFormationExecutionR-CIMN6IH7VDFH"
+artifacts_bucket = "aws-sam-cli-managed-prod-meal-pla-artifactsbucket-1mln9f452s7ip"
 image_repository = ""
 region = "eu-west-1"

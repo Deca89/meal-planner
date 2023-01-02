@@ -47,13 +47,13 @@ Parameters:
     Default: "dev-meal-planner"
   TestingPipelineExecutionRole:
     Type: String
-    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-meal-PipelineExecutionRole-X66V7RDIJTFQ"
+    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-meal-PipelineExecutionRole-1RZKLA58YTD14"
   TestingCloudFormationExecutionRole:
     Type: String
-    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-m-CloudFormationExecutionR-16WCT49JT052D"
+    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-m-CloudFormationExecutionR-LJT4XNOA9IHP"
   TestingArtifactBucket:
     Type: String
-    Default: "aws-sam-cli-managed-dev-meal-plan-artifactsbucket-dinh6b8tem1a"
+    Default: "aws-sam-cli-managed-dev-meal-plan-artifactsbucket-at57ob5xen5h"
   TestingImageRepository:
     Type: String
     # If there are functions with "Image" PackageType in your template,
@@ -68,13 +68,13 @@ Parameters:
     Default: "prod-meal-planner"
   ProdPipelineExecutionRole:
     Type: String
-    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-prod-mea-PipelineExecutionRole-1SSMZBDY1QQGI"
+    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-prod-mea-PipelineExecutionRole-HT9GRU58FQVB"
   ProdCloudFormationExecutionExeRole:
     Type: String
-    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-prod-CloudFormationExecutionR-1LZX14R406QFM"
+    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-prod-CloudFormationExecutionR-CIMN6IH7VDFH"
   ProdArtifactBucket:
     Type: String
-    Default: "aws-sam-cli-managed-prod-meal-pla-artifactsbucket-2sd9zzbjvcxp"
+    Default: "aws-sam-cli-managed-prod-meal-pla-artifactsbucket-1mln9f452s7ip"
   ProdImageRepository:
     Type: String
     # If there are functions with "Image" PackageType in your template,
