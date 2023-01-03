@@ -60,6 +60,6 @@ def lambda_handler(event, context):
     # Send the message to the SNS topic
     sns = boto3.client("sns")
     sns.publish(
-        TopicArn="arn:aws:sns:eu-west-1:341014156608:katri-sns",
+        TopicArn="arn:aws:sns:eu-west-1:341014156608:dev-meal-planner-MySNSTopicMealPlanner-UdDfxszWnVoP",
         Message=message
     )
