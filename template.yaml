@@ -70,11 +70,11 @@ Resources:
           Type: Schedule
           Properties:
             Schedule: cron(0 10 ? * 6 *)
-  PollFromSQS:
+  PollFromApiSendSNS:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: lambdas/
-      Handler: pollfromSQS.lambda_handler
+      Handler: pollfromapisendsns.lambda_handler
       Runtime: python3.9
       Architectures:
         - x86_64
