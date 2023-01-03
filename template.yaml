@@ -67,6 +67,9 @@ Resources:
         - x86_64
       Policies:
         - AWSLambda_FullAccess
+      Environment:
+        Variables:
+          CallLambda: !Ref PollFromApiSendSNS
       Events:
         CloudWatchEvent:
           Type: Schedule

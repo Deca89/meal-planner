@@ -1,23 +1,24 @@
 import json
 #call other lambda function three times
 import boto3
+import os
 
 
 def lambda_handler(event, context):
     # TODO implement
     client = boto3.client('lambda')
     response = client.invoke(
-        FunctionName='arn:aws:lambda:eu-west-1:341014156608:function:prod-meal-planner-PollFromApiSendSNS-rYbT31wfMFDq',
+        FunctionName=os.environ['CallLambda'],
         InvocationType='Event',
         Payload=json.dumps({'diet': 'vegan'})
     )
     response = client.invoke(
-        FunctionName='arn:aws:lambda:eu-west-1:341014156608:function:prod-meal-planner-PollFromApiSendSNS-rYbT31wfMFDq',
+        FunctionName=os.environ['CallLambda'],
         InvocationType='Event',
         Payload=json.dumps({'diet': 'vegetarian'})
     )
     response = client.invoke(
-        FunctionName='arn:aws:lambda:eu-west-1:341014156608:function:prod-meal-planner-PollFromApiSendSNS-rYbT31wfMFDq',
+        FunctionName=os.environ['CallLambda'],
         InvocationType='Event',
         Payload=json.dumps({'diet':'all-recipes'})
     )
