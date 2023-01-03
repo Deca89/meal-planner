@@ -96,12 +96,6 @@ Resources:
       Endpoint: !Ref Subemail
       Protocol: email
       TopicArn: !Ref MySNSTopicMealPlanner
- 
-  MyQueue: 
-    Type: AWS::SQS::Queue
-    Properties: 
-      QueueName: "MealPlanner"
-
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
