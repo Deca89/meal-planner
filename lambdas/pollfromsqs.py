@@ -1,42 +1,69 @@
 import json
+#call other lambda function three times
+import boto3
+
+
+def lambda_handler(event, context):
+    # TODO implement
+    client = boto3.client('lambda')
+    response = client.invoke(
+        FunctionName='arn:aws:lambda:eu-west-1:341014156608:function:prod-meal-planner-PollFromApiSendSNS-rYbT31wfMFDq',
+        InvocationType='Event',
+        Payload=json.dumps({'diet': 'vegan'})
+    )
+    response = client.invoke(
+        FunctionName='arn:aws:lambda:eu-west-1:341014156608:function:prod-meal-planner-PollFromApiSendSNS-rYbT31wfMFDq',
+        InvocationType='Event',
+        Payload=json.dumps({'diet': 'vegetarian'})
+    )
+    response = client.invoke(
+        FunctionName='arn:aws:lambda:eu-west-1:341014156608:function:prod-meal-planner-PollFromApiSendSNS-rYbT31wfMFDq',
+        InvocationType='Event',
+        Payload=json.dumps({'diet':'all-recipes'})
+    )
+    return {
+        'statusCode': 200,
+        'body': json.dumps('Hello from Lambda!')
+    }
 
 # import requests
 
 
-def lambda_handler(event, context):
-    """Sample pure Lambda function
+# def lambda_handler(event, context):
 
-    Parameters
-    ----------
-    event: dict, required
-        API Gateway Lambda Proxy Input Format
+#     """Sample pure Lambda function
 
-        Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
+#     Parameters
+#     ----------
+#     event: dict, required
+#         API Gateway Lambda Proxy Input Format
 
-    context: object, required
-        Lambda Context runtime methods and attributes
+#         Event doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html#api-gateway-simple-proxy-for-lambda-input-format
 
-        Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
+#     context: object, required
+#         Lambda Context runtime methods and attributes
 
-    Returns
-    ------
-    API Gateway Lambda Proxy Output Format: dict
+#         Context doc: https://docs.aws.amazon.com/lambda/latest/dg/python-context-object.html
 
-        Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
-    """
+#     Returns
+#     ------
+#     API Gateway Lambda Proxy Output Format: dict
 
-    # try:
-    #     ip = requests.get("http://checkip.amazonaws.com/")
-    # except requests.RequestException as e:
-    #     # Send some context about this error to Lambda Logs
-    #     print(e)
+#         Return doc: https://docs.aws.amazon.com/apigateway/latest/developerguide/set-up-lambda-proxy-integrations.html
+#     """
 
-    #     raise e
+#     # try:
+#     #     ip = requests.get("http://checkip.amazonaws.com/")
+#     # except requests.RequestException as e:
+#     #     # Send some context about this error to Lambda Logs
+#     #     print(e)
 
-    return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "hello world",
-            # "location": ip.text.replace("\n", "")
-        }),
-    }
+#     #     raise e
+
+#     return {
+#         "statusCode": 200,
+#         "body": json.dumps({
+#             "message": "hello world",
+#             # "location": ip.text.replace("\n", "")
+#         }),
+#     }
