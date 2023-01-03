@@ -37,11 +37,11 @@ Resources:
       ProvisionedThroughput: 
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
-  AddClientToDatabase:
+  AddClientToSNS:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: lambdas/
-      Handler: addtoDB.lambda_handler
+      Handler: addtoSNS.lambda_handler
       Runtime: python3.9
       Architectures:
         - x86_64
@@ -52,7 +52,7 @@ Resources:
         Variables:
           TopicArn: !Ref MySNSTopicMealPlanner
       Events:
-        AddToDB:
+        addtoSNS:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /addclient

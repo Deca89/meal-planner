@@ -11,13 +11,14 @@ def lambda_handler(event, context):
     email = event['queryStringParameters']['email']
     
     client = boto3.client('sns')
+    filters = {'diet': diet}
 
     response = client.subscribe(
         TopicArn=os.environ['TopicArn'],
         Protocol='email',
         Endpoint=email,
         Attributes={
-            'FilterPolicy': {'diet': diet}
+            'FilterPolicy': json.dumps(filters)
         },
         )
 
