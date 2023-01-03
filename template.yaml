@@ -90,11 +90,16 @@ Resources:
       Endpoint: !Ref Subemail
       Protocol: email
       TopicArn: !Ref MySNSTopicMealPlanner
+
+  MyStaticWebsiteBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      AccessControl: PublicRead
+      WebsiteConfiguration:
+        IndexDocument: index.html
+        ErrorDocument: error.html
  
-  MyQueue: 
-    Type: AWS::SQS::Queue
-    Properties: 
-      QueueName: "MealPlanner"
+
 
 
 Outputs:
