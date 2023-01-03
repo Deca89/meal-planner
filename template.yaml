@@ -10,6 +10,11 @@ Globals:
   Function:
     Timeout: 3
 
+Parameters:
+  Subemail: 
+    Type: String
+    Default: nelli.ukkonen@brightstraining.com
+
 Resources:
   MealPlannerDynamoDB: 
     Type: AWS::DynamoDB::Table
@@ -80,6 +85,23 @@ Resources:
             Path: /pollfromsqs
             Method: get
   
+
+  MySNSTopicMealPlanner:
+    Type: AWS::SNS::Topic
+    Properties:
+      KmsMasterKeyId: alias/aws/sns
+  MySubscription:
+    Type: AWS::SNS::Subscription
+    Properties:
+      Endpoint: !Ref Subemail
+      Protocol: email
+      TopicArn: !Ref MySNSTopicMealPlanner
+ 
+  MyQueue: 
+    Type: AWS::SQS::Queue
+    Properties: 
+      QueueName: "MealPlanner"
+
 
 Outputs:
   # ServerlessRestApi is an implicit API created out of Events key under Serverless::Function
