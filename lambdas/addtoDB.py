@@ -1,9 +1,33 @@
 import json
+import boto3
+import os
+import uuid
 
 # import requests
 
 
 def lambda_handler(event, context):
+    diet = event['queryStringParameters']['diet']
+    email = event['queryStringParameters']['email']
+    id = str(uuid.uuid4())
+    
+    toSend = {
+        'diet': diet,
+        'id': id,
+        'email': email,
+    }
+
+    data = boto3.client('dynamodb').put_item(TableName=os.environ['TableName'], Item=json.loads(toSend))
+
+    # bucket = event['Records'][0]['s3']['bucket']['name']
+    # json_file_name = event['Records'][0]['s3']['object']['key']
+    # json_object = s3_client.get_object(Bucket=bucket,Key=json_file_name)
+    # file_reader = json_object['Body'].read().decode("utf-8")
+    # file_reader = ast.literal_eval(file_reader)
+    table = dynamodb_client.Table('user')
+    table.put_item(Item=file_reader)
+    return "success"
+
     """Sample pure Lambda function
 
     Parameters

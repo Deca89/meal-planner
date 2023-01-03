@@ -16,14 +16,14 @@ Resources:
     Properties: 
       AttributeDefinitions: 
         -
-          AttributeName: "type"
+          AttributeName: "diet"
           AttributeType: "S"
         - 
           AttributeName: "id"
           AttributeType: "N"
       KeySchema: 
         - 
-          AttributeName: "type"
+          AttributeName: "diet"
           KeyType: "HASH"
         -
           AttributeName: "id"
@@ -40,6 +40,12 @@ Resources:
       Runtime: python3.9
       Architectures:
         - x86_64
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AmazonSNSFullAccess
+      Environment:
+        Variables:
+          TableName: !Ref MealPlannerDynamoDB
       Events:
         AddToDB:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
