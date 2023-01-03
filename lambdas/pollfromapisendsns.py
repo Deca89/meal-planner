@@ -12,11 +12,11 @@ def lambda_handler(event, context):
     recipe_names = set()
     for i in range(7):
         # Determine the API URL to use based on the event path
-        if event.get("path", "") == "/vegetarian":
+        if event['diet'] == "vegetarian":
             api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner,vegetarian&apiKey=6f7d042cb1894f8d93f9b49cc8bbfa28"
-        elif event.get("path", "") == "/all-recipes":
+        elif event['diet'] == "all-recipes":
             api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner&apiKey=6f7d042cb1894f8d93f9b49cc8bbfa28"
-        elif event.get("path", "") == "/vegan":
+        elif event['diet'] == "vegan":
             api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner,vegan&apiKey=6f7d042cb1894f8d93f9b49cc8bbfa28"
         else:
             # Use the default API URL if no relevant event path is present
