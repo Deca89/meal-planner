@@ -21,14 +21,14 @@ Resources:
     Properties: 
       AttributeDefinitions: 
         -
-          AttributeName: "type"
+          AttributeName: "diet"
           AttributeType: "S"
         - 
           AttributeName: "id"
           AttributeType: "N"
       KeySchema: 
         - 
-          AttributeName: "type"
+          AttributeName: "diet"
           KeyType: "HASH"
         -
           AttributeName: "id"
@@ -37,16 +37,22 @@ Resources:
       ProvisionedThroughput: 
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
-  AddClientToDatabase:
+  AddClientToSNS:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: lambdas/
-      Handler: addtoDB.lambda_handler
+      Handler: addtoSNS.lambda_handler
       Runtime: python3.9
       Architectures:
         - x86_64
+      Policies:
+        - AmazonDynamoDBFullAccess
+        - AmazonSNSFullAccess
+      Environment:
+        Variables:
+          TopicArn: !Ref MySNSTopicMealPlanner
       Events:
-        AddToDB:
+        addtoSNS:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
           Properties:
             Path: /addclient
@@ -59,19 +65,26 @@ Resources:
       Runtime: python3.9
       Architectures:
         - x86_64
+      Policies:
+        - AWSLambda_FullAccess
+      Environment:
+        Variables:
+          CallLambda: !Ref PollFromApiSendSNS
       Events:
         CloudWatchEvent:
           Type: Schedule
           Properties:
             Schedule: cron(0 10 ? * 6 *)
-  PollFromSQS:
+  PollFromApiSendSNS:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
     Properties:
       CodeUri: lambdas/
-      Handler: pollfromSQS.lambda_handler
+      Handler: pollfromapisendsns.lambda_handler
       Runtime: python3.9
       Architectures:
         - x86_64
+      Policies:
+        - AmazonSNSFullAccess
       Events:
         PollSQS:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
@@ -91,6 +104,7 @@ Resources:
       Protocol: email
       TopicArn: !Ref MySNSTopicMealPlanner
 
+
   MyStaticWebsiteBucket:
     Type: AWS::S3::Bucket
     Properties:
@@ -99,6 +113,7 @@ Resources:
         IndexDocument: index.html
         ErrorDocument: error.html
  
+
 
 
 
