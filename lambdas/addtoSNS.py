@@ -29,7 +29,10 @@ def lambda_handler_2(event, context):
     return {
         'statusCode': 200,
         'headers': {'Content-Type': 'text/html'},
-        'body': 'You have been subscribed to the ' + event['queryStringParameters']['diet'] + ' diet'
+        'body': 'You have been subscribed to the ' + event['queryStringParameters']['diet'] + ' diet',
+        'Access-Control-Allow-Origin': '*',
+        'isBase64Encoded': False
+
     }
     # return {
     #     'statusCode': 200,
