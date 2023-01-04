@@ -61,5 +61,11 @@ def lambda_handler(event, context):
     sns = boto3.client("sns")
     sns.publish(
         TopicArn="arn:aws:sns:eu-west-1:341014156608:dev-meal-planner-MySNSTopicMealPlanner-UdDfxszWnVoP",
-        Message=message
+        Message=message,
+        MessageAttributes={
+        'diet': {
+            'DataType': 'string',
+            'StringValue': event['diet']
+        }
+    }
     )
