@@ -1,0 +1,20 @@
+<html>
+  <head>
+    <title>Weekly Meal Recipe Subscription</title>
+  </head>
+  <body>
+    <h1>Weekly Meal Recipe Subscription</h1>
+    <p>Enter your email address and select the type of recipes you want to receive to subscribe to our weekly meal recipe email list:</p>
+    <form action="https://nbtpsvadxh.execute-api.eu-west-1.amazonaws.com/Prod/addclient" method="get">
+      <label for="email">Email:</label><br>
+      <input type="text" id="email" name="email"><br>
+      <label for="diet">Recipe Type:</label><br>
+      <select id="diet" name="diet">
+        <option value="all-recipes">All Recipes</option>
+        <option value="vegan">Vegan Recipes</option>
+        <option value="vegetarian">Vegetarian Recipes</option>
+      </select><br>
+      <input type="submit" value="Subscribe">
+    </form>
+  </body>
+</html>
