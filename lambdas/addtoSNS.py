@@ -29,7 +29,8 @@ def lambda_handler_2(event, context):
     return {
         'statusCode': 200,
         'headers': {'Content-Type': 'text/html'},
-        'body': 'check e-mail'
+        'body': '<h1>check e-mail</h1>',
+        "isBase64Encoded": False
     }
     # return {
     #     "statusCode": 200,

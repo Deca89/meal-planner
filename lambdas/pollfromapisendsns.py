@@ -32,13 +32,17 @@ def lambda_handler(event, context):
         ingredients = []
         for ingredient in recipe["ingredients"]["SS"]:
             split_ingredient = ingredient.split(":")
-            ingredients.append(f"{split_ingredient[1]} {ingredient[2]} {ingredient[0]}")
-            shopping_list.add(ingredient[0])
-        instructions = data["recipes"][0]["instructions"]
+            ingredients.append(f"{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}")
+            shopping_list.add(split_ingredient[0])
+        instructions = recipe["instructions"]["S"]
         recipes.append({
             "recipe_name": recipe_name,
             "ingredients": ingredients,
-            "instructions": instructions
+            "instructions": instructions,
+            "calories": recipe["calories"]["S"],
+            "carbohydrates": recipe["carbohydrates"]["S"],
+            "protein": recipe["protein"]["S"],
+            "fat": recipe["fat"]["S"]
         })
         recipe_names.add(recipe_name)
 
@@ -46,6 +50,11 @@ def lambda_handler(event, context):
     message = "Recipes:\n\n"
     for i, recipe in enumerate(recipes):
         message += f"{i+1}. {recipe['recipe_name']}\n"
+        message += "Nutrition:\n"
+        message += f"Calories: {recipe['calories']}\n"
+        message += f"Carbohydrates: {recipe['carbohydrates']}\n"
+        message += f"Protein: {recipe['protein']}\n"
+        message += f"Fat: {recipe['fat']}\n"
         message += "Ingredients:\n"
         for ingredient in recipe['ingredients']:
             message += f"- {ingredient}\n"
