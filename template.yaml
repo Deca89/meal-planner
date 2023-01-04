@@ -81,6 +81,7 @@ Resources:
       CodeUri: lambdas/
       Handler: pollfromapisendsns.lambda_handler
       Runtime: python3.9
+      Timeout: 900
       Architectures:
         - x86_64
       Policies:
