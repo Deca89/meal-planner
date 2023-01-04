@@ -14,7 +14,7 @@ def lambda_handler(event, context):
             },
         },
         FilterExpression='diet = :d',
-        TableName=f"{os.environ('OurDB')}"
+        TableName=f"{os.environ['OurDB']}"
         )
     recipes_from_db = response["Items"]
 

@@ -22,10 +22,6 @@ def lambda_handler(event, context):
         },
         )
 
-
-
-
-def lambda_handler_2(event, context):
     return {
         'statusCode': 200,
         'headers': {'Content-Type': 'text/html'},
