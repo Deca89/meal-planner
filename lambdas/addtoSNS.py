@@ -29,10 +29,15 @@ def lambda_handler_2(event, context):
     return {
         'statusCode': 200,
         'headers': {'Content-Type': 'text/html'},
-        'body': '<h1>check e-mail</h1>',
-        "isBase64Encoded": False
+        'body': 'You have been subscribed to the ' + event['queryStringParameters']['diet'] + ' diet'
     }
     # return {
+    #     'statusCode': 200,
+    #     'headers': {'Content-Type': 'text/html'},
+    #     'body': '<h1>check e-mail</h1>',
+    #     "isBase64Encoded": False
+    # }
+    # # return {
     #     "statusCode": 200,
     #     "body": json.dumps({
     #         "message": "success",
