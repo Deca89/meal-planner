@@ -22,10 +22,20 @@ def lambda_handler(event, context):
         },
         )
 
+
+
+
+def lambda_handler_2(event, context):
     return {
-        "statusCode": 200,
-        "body": json.dumps({
-            "message": "success",
-            # "location": ip.text.replace("\n", "")
-        }),
+        'statusCode': 200,
+        'headers': {'Content-Type': 'text/html'},
+        'body': 'check e-mail'
     }
+    # return {
+    #     "statusCode": 200,
+    #     "body": json.dumps({
+    #         "message": "success",
+    #         # "location": ip.text.replace("\n", "")
+    #     }),
+    # }
+

@@ -1,40 +1,39 @@
 import json
 import urllib3
 import boto3
+import os
+import random
 
 def lambda_handler(event, context):
-    # Create an HTTP pool
-    http = urllib3.PoolManager()
-    
-    # Make a request to the API for 7 random recipes
+    dynamodb = boto3.client("dynamodb")
+    # Get all recipe names from the DynamoDB table
+    response = dynamodb.scan(
+        ExpressionAttributeValues={
+        ':d': {
+            'S': event['diet'],
+            },
+        },
+        FilterExpression='diet = :d',
+        TableName=os.environ('OurDB')
+        )
+    recipes_from_db = response["Items"]
+
+    # Get 7 random recipes
     recipes = []
     shopping_list = set()
     recipe_names = set()
     for i in range(7):
-        # Determine the API URL to use based on the event path
-        if event['diet'] == "vegetarian":
-            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner,vegetarian&apiKey=7f5cc7b52d7a41a199059e160a6e617e"
-        elif event['diet'] == "all-recipes":
-            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner&apiKey=7f5cc7b52d7a41a199059e160a6e617e"
-        elif event['diet'] == "vegan":
-            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner,vegan&apiKey=7f5cc7b52d7a41a199059e160a6e617e"
-        else:
-            # Use the default API URL if no relevant event path is present
-            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner&apiKey=7f5cc7b52d7a41a199059e160a6e617e"
-        # Make a request to the API
-        response = http.request("GET", api_url)
-        data = json.loads(response.data.decode("utf-8"))
-        # Extract the recipe information from the response data
-        recipe_name = data["recipes"][0]["title"]
+        recipe = random.choice(recipes_from_db)
+        recipe_name = recipe["recipe_name"]["S"]
         # Keep making API requests until you get a new recipe
         while recipe_name in recipe_names:
-            response = http.request("GET", api_url)
-            data = json.loads(response.data.decode("utf-8"))
-            recipe_name = data["recipes"][0]["title"]
+            recipe = random.choice(recipes_from_db)
+            recipe_name = recipe["recipe_name"]["S"]
         ingredients = []
-        for ingredient in data["recipes"][0]["extendedIngredients"]:
-            ingredients.append(f"{ingredient['amount']} {ingredient['unit']} {ingredient['name']}")
-            shopping_list.add(ingredient['name'])
+        for ingredient in recipe["ingredients"]["SS"]:
+            split_ingredient = ingredient.split(":")
+            ingredients.append(f"{split_ingredient[1]} {ingredient[2]} {ingredient[0]}")
+            shopping_list.add(ingredient[0])
         instructions = data["recipes"][0]["instructions"]
         recipes.append({
             "recipe_name": recipe_name,
