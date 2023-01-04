@@ -13,14 +13,14 @@ def lambda_handler(event, context):
     for i in range(7):
         # Determine the API URL to use based on the event path
         if event['diet'] == "vegetarian":
-            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner,vegetarian&apiKey=6f7d042cb1894f8d93f9b49cc8bbfa28"
+            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner,vegetarian&apiKey=7f5cc7b52d7a41a199059e160a6e617e"
         elif event['diet'] == "all-recipes":
-            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner&apiKey=6f7d042cb1894f8d93f9b49cc8bbfa28"
+            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner&apiKey=7f5cc7b52d7a41a199059e160a6e617e"
         elif event['diet'] == "vegan":
-            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner,vegan&apiKey=6f7d042cb1894f8d93f9b49cc8bbfa28"
+            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner,vegan&apiKey=7f5cc7b52d7a41a199059e160a6e617e"
         else:
             # Use the default API URL if no relevant event path is present
-            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner&apiKey=6f7d042cb1894f8d93f9b49cc8bbfa28"
+            api_url = "https://api.spoonacular.com/recipes/random?number=1&tags=dinner&apiKey=7f5cc7b52d7a41a199059e160a6e617e"
         # Make a request to the API
         response = http.request("GET", api_url)
         data = json.loads(response.data.decode("utf-8"))
@@ -64,7 +64,7 @@ def lambda_handler(event, context):
         Message=message,
         MessageAttributes={
         'diet': {
-            'DataType': 'string',
+            'DataType': 'String',
             'StringValue': event['diet']
         }
     }
