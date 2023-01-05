@@ -24,9 +24,11 @@ def lambda_handler(event, context):
     message = 'You have been subscribed to the ' + event['queryStringParameters']['diet'] + ' diet'
     return {
         'statusCode': 200,
-        'headers': {'Content-Type': 'text/html'},
+        "headers": {
+            'Content-Type': 'text/html',
+            'Access-Control-Allow-Origin': '*',
+            },
         'body': message,
-        'Access-Control-Allow-Origin': '*',
         'isBase64Encoded': False
 
     }
