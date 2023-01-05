@@ -1,0 +1,20 @@
+-------------S3 pricing------------------
+
+
+GET/SELECT from s3 bucket price: 0.0004$ per 1000
+S3 storage costs: 0.023 per GB per month
+
+--------------DynamoDB--------------
+
+Write capacity unit (WCU)	$0.00065 per WCU per hour
+Read capacity unit (RCU)	$0.00013 per RCU per hour
+
+DynamoDB charges one WCU for each write per second (up to 1 KB) and two WCUs for each transactional write per second.
+
+
+
+
+--------------------EC2---------------
+
+on-demand: t3 0.0057 $ per hour = 4.104 per month
+reserved: t3 0.003 $ per hour = 2.16 per month
