@@ -21,11 +21,11 @@ def lambda_handler(event, context):
             'FilterPolicy': json.dumps(filters)
         },
         )
-
+    message = 'You have been subscribed to the ' + event['queryStringParameters']['diet'] + ' diet'
     return {
         'statusCode': 200,
         'headers': {'Content-Type': 'text/html'},
-        'body': 'You have been subscribed to the ' + event['queryStringParameters']['diet'] + ' diet',
+        'body': message,
         'Access-Control-Allow-Origin': '*',
         'isBase64Encoded': False
 
