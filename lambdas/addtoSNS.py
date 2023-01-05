@@ -21,14 +21,16 @@ def lambda_handler(event, context):
             'FilterPolicy': json.dumps(filters)
         },
         )
-    message = 'You have been subscribed to the ' + event['queryStringParameters']['diet'] + ' diet'
+    response_body = f"<p>You have been subscribed to the {event['queryStringParameters']['diet']} diet</p>"
+    response_body = response_body + f"<p></p><h1>  </h1><h2>  </h2><form id='homepage'action='{os.environ['NetPage']}'><input type='submit' value='Go to Frontpage' /></form>"
+    response_body = response_body + "<p>Bon appétit!</p>"
     return {
         'statusCode': 200,
         "headers": {
             'Content-Type': 'text/html',
             'Access-Control-Allow-Origin': '*',
             },
-        'body': message,
+        'body': response_body,
         'isBase64Encoded': False
 
     }

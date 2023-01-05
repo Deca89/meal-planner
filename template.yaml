@@ -56,6 +56,7 @@ Resources:
       Environment:
         Variables:
           TopicArn: !Ref MySNSTopicMealPlanner
+          NetPage: http://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3-website-eu-west-1.amazonaws.com/
       Events:
         addtoSNS:
           Type: Api # More info about API Event Source: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#api
