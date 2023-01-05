@@ -22,8 +22,8 @@ def lambda_handler(event, context):
         },
         )
     response_body = f"<p>You have been subscribed to the {event['queryStringParameters']['diet']} diet</p>"
-    response_body = response_body + f"<p></p><h1>  </h1><h2>  </h2><form id='homepage'action='{os.environ['NetPage']}'><input type='submit' value='Go to Frontpage' /></form>"
-    response_body = response_body + "<p>Bon appétit!</p>"
+    response_body = response_body + f"<p></p><h1>  </h1><h2>  <a href='{os.environ['NetPage']}'>Back to the homepage</a>"
+    response_body = response_body + "<p>Bon app&Eacute;tit!</p>"
     return {
         'statusCode': 200,
         "headers": {
