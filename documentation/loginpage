@@ -1,0 +1,8 @@
+LogIn
+1. Username
+2. Password
+
+Favorities
+    when user is logged in, favorities is saved as link to S3 bucket
+
+

@@ -6,10 +6,10 @@ kms = boto3.client("kms")
 
 def lambda_handler(event, context):
     username = event["username"]
-    passoword = event["password"]
+    password = event["password"]
 
     response = dynamodb.get_item(
-        TableName=#
+        TableName = ("SignInDynamoDB")
         Key={"username": {"S": username}}
     )
 
