@@ -25,7 +25,7 @@ def lambda_handler(event, context):
         raise e
 
     # Decrypts secret using the associated KMS key.
-    openai.api_key = get_secret_value_response['SecretString']
+    openai.api_key = get_secret_value_response['SecretString']["key"]
 
     prompt = f"Can you give me a recipe for {event['queryStringParameters']['food']} in html format using metric measurements?"
 
