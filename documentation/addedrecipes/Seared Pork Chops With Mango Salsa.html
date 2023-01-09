@@ -1,102 +1,79 @@
-import boto3
 
-def createhtml():
-    # Create a DynamoDB client
-    dynamodb = boto3.client("dynamodb")
-    # Get all recipe names from the DynamoDB table
-    response = dynamodb.scan(TableName="dev-meal-planner-MealPlannerDynamoDB-9O68NTU7Y19G")
-    #for recipe in response create a new html file
-    for item in response["Items"]:
-        filenamehere = item["recipe_name"]["S"]
-        filenamehere = filenamehere + ".html"
-        with open(filenamehere, 'w', encoding="utf-8") as my_file:
-            my_file.write(f"""
                 <html>
                     <head>
                         <title>Weekly Meal Recipe Subscription</title>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
                         <style>
                             body 
-                            {{
+                            {
                                 font-family: GFS Didot;
                                 background-color: #ffffff;
-                            }}
+                            }
 
                             .centerImage
-                            {{
+                            {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
                             
-                            h1 {{
+                            h1 {
                                 text-align: center;
-                            }}
+                            }
 
-                            .text-container {{
+                            .text-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
 
-                            .flex-container {{
+                            .flex-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
                                 display: flex;
-                            }}
+                            }
 
-                            .flex-container > div {{
+                            .flex-container > div {
                                 margin: 20px;
                                 padding: 20px;
                                 font-size: 20px;
-                            }}
+                            }
 
                         </style>
                     </head>
                     <body>
                         <div class="text-container">
-                        <h1>{item["recipe_name"]["S"]}</h1>
+                        <h1>Seared Pork Chops With Mango Salsa</h1>
                         </div>
                         <div class="flex-container">
                         <div>
-                            <img src="{item["image"]["S"]}" alt="{item["image"]["S"]}">
+                            <img src="https://spoonacular.com/recipeImages/659674-556x370.jpg" alt="https://spoonacular.com/recipeImages/659674-556x370.jpg">
                         </div>
                         <div>
                             <h2>Nutrition</h2>
-                            <p>Calories: {item["calories"]["S"]}</p>
-                            <p>Fat: {item["fat"]["S"]}</p>
-                            <p>Carbohydrates: {item["carbohydrates"]["S"]}</p>
-                            <p>Protein: {item["protein"]["S"]}</p>
-                            <p>Gluten free: {item["glutenFree"]["S"]}</p>
-                            <p>Dairy free: {item["dairyFree"]["S"]}</p>
+                            <p>Calories: 393k</p>
+                            <p>Fat: 14g</p>
+                            <p>Carbohydrates: 25g</p>
+                            <p>Protein: 41g</p>
+                            <p>Gluten free: True</p>
+                            <p>Dairy free: True</p>
 
                         </div>
                         </div>
                         <div class="text-container">
                         <h2>Ingredients</h2>
                         <ul>
-            """)
-            for ingredient in item["ingredients"]["SS"]:
-                split_ingredient = ingredient.split(":")
-                if split_ingredient[2] is None:
-                    split_ingredient[2] = " "
-                my_file.write(f"<li>{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}</li>")
-            
-            my_file.write(
-                f"""
+            <li>1.0  bell pepper</li><li>4.0 servings bell pepper</li><li>2.0 tsps cayenne</li><li>4.0 servings cilantro</li><li>2.0 Tbsps cumin</li><li>1.0 Tbsp garlic powder</li><li>1.0  lime</li><li>1.0  mango</li><li>2.0 Tbsps mustard powder</li><li>1.0 Tbsp onion powder</li><li>0.5  onion</li><li>680.389 g pork chops</li><li>4.0 servings salt</li><li>6.0  scallions</li><li>1.0  tomato</li><li>2.0 Tbsps vegetable oil</li>
                         </ul>
                     </div>
                     <div class="text-container">
                     <h2>Instructions</h2>
-                    <p>{item["instructions"]["S"]}</p> 
+                    <p><ol><li>In a bowl thoroughly mix dry rub ingredients (cumin, mustard powder, cayenne, garlic powder, onion powder, 1 tablespoon salt, 2 teaspoons black pepper).</li><li>Dust and massage dry rub into pork chops, rest in fridge for about 10min</li><li>Prep mango, bell pepper, onion, scallions, tomato, and cilantro set aside.</li><li>Heat pan w/ oil to med high, sear pork chops. 2-3 minutes on each side.</li><li>Let pork chops rest 5-8 minutes before serving.</li><li>Take salsa bowl, add juice of a whole lime, add salt and pepper to taste.</li><li>Mix thoroughly</li><li>Place pork chop on plate and top with mango salsa.</li></ol></p> 
                     </div>
                 </body>
                 </html>
-                """
-            )
-
-createhtml()
+                

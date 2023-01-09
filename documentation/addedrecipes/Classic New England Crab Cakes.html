@@ -1,102 +1,82 @@
-import boto3
 
-def createhtml():
-    # Create a DynamoDB client
-    dynamodb = boto3.client("dynamodb")
-    # Get all recipe names from the DynamoDB table
-    response = dynamodb.scan(TableName="dev-meal-planner-MealPlannerDynamoDB-9O68NTU7Y19G")
-    #for recipe in response create a new html file
-    for item in response["Items"]:
-        filenamehere = item["recipe_name"]["S"]
-        filenamehere = filenamehere + ".html"
-        with open(filenamehere, 'w', encoding="utf-8") as my_file:
-            my_file.write(f"""
                 <html>
                     <head>
                         <title>Weekly Meal Recipe Subscription</title>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
                         <style>
                             body 
-                            {{
+                            {
                                 font-family: GFS Didot;
                                 background-color: #ffffff;
-                            }}
+                            }
 
                             .centerImage
-                            {{
+                            {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
                             
-                            h1 {{
+                            h1 {
                                 text-align: center;
-                            }}
+                            }
 
-                            .text-container {{
+                            .text-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
 
-                            .flex-container {{
+                            .flex-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
                                 display: flex;
-                            }}
+                            }
 
-                            .flex-container > div {{
+                            .flex-container > div {
                                 margin: 20px;
                                 padding: 20px;
                                 font-size: 20px;
-                            }}
+                            }
 
                         </style>
                     </head>
                     <body>
                         <div class="text-container">
-                        <h1>{item["recipe_name"]["S"]}</h1>
+                        <h1>Classic New England Crab Cakes</h1>
                         </div>
                         <div class="flex-container">
                         <div>
-                            <img src="{item["image"]["S"]}" alt="{item["image"]["S"]}">
+                            <img src="https://spoonacular.com/recipeImages/639620-556x370.jpg" alt="https://spoonacular.com/recipeImages/639620-556x370.jpg">
                         </div>
                         <div>
                             <h2>Nutrition</h2>
-                            <p>Calories: {item["calories"]["S"]}</p>
-                            <p>Fat: {item["fat"]["S"]}</p>
-                            <p>Carbohydrates: {item["carbohydrates"]["S"]}</p>
-                            <p>Protein: {item["protein"]["S"]}</p>
-                            <p>Gluten free: {item["glutenFree"]["S"]}</p>
-                            <p>Dairy free: {item["dairyFree"]["S"]}</p>
+                            <p>Calories: 322k</p>
+                            <p>Fat: 26g</p>
+                            <p>Carbohydrates: 6g</p>
+                            <p>Protein: 15g</p>
+                            <p>Gluten free: False</p>
+                            <p>Dairy free: False</p>
 
                         </div>
                         </div>
                         <div class="text-container">
                         <h2>Ingredients</h2>
                         <ul>
-            """)
-            for ingredient in item["ingredients"]["SS"]:
-                split_ingredient = ingredient.split(":")
-                if split_ingredient[2] is None:
-                    split_ingredient[2] = " "
-                my_file.write(f"<li>{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}</li>")
-            
-            my_file.write(
-                f"""
+            <li>118.294 ml celery</li><li>78.863 ml dry bread crumbs</li><li>3.0 drops hot sauce</li><li>453.592 g lump crab meat</li><li>118.294 ml mayonnaise</li><li>118.294 ml onion</li><li>2.0 Tbsps parsley</li><li>0.5 tsps seafood seasoning</li><li>6.0 Tbsps unsalted butter</li><li>0.5 tsps worcestershire sauce</li>
                         </ul>
                     </div>
                     <div class="text-container">
                     <h2>Instructions</h2>
-                    <p>{item["instructions"]["S"]}</p> 
+                    <p>Cook onion and celery in 4 tablespoons butter over moderately low heat, until tender and transfer to a bowl. Stir in crab and bread crumbs.
+In a small bowl whisk together mayonnaise, seafood seasoning, Worcestershire sauce, hot sauce, parsley, and salt and pepper to taste and stir into crab mixture until combined well.
+Line a baking sheet with wax paper. Form crab mixture into 6 flattened rounds. Chill crab cakes, covered with plastic wrap, at least 1 hour.
+Heat 1 tablespoon butter over moderate heat until foam subsides and cook half of crab cakes until golden brown, about 2 to 3 minutes on each side. Cook remaining cakes in remaining tablespoon butter in same manner.</p> 
                     </div>
                 </body>
                 </html>
-                """
-            )
-
-createhtml()
+                
