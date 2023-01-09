@@ -1,102 +1,84 @@
-import boto3
 
-def createhtml():
-    # Create a DynamoDB client
-    dynamodb = boto3.client("dynamodb")
-    # Get all recipe names from the DynamoDB table
-    response = dynamodb.scan(TableName="dev-meal-planner-MealPlannerDynamoDB-9O68NTU7Y19G")
-    #for recipe in response create a new html file
-    for item in response["Items"]:
-        filenamehere = item["recipe_name"]["S"]
-        filenamehere = filenamehere + ".html"
-        with open(filenamehere, 'w', encoding="utf-8") as my_file:
-            my_file.write(f"""
                 <html>
                     <head>
                         <title>Weekly Meal Recipe Subscription</title>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
                         <style>
                             body 
-                            {{
+                            {
                                 font-family: GFS Didot;
                                 background-color: #ffffff;
-                            }}
+                            }
 
                             .centerImage
-                            {{
+                            {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
                             
-                            h1 {{
+                            h1 {
                                 text-align: center;
-                            }}
+                            }
 
-                            .text-container {{
+                            .text-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
 
-                            .flex-container {{
+                            .flex-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
                                 display: flex;
-                            }}
+                            }
 
-                            .flex-container > div {{
+                            .flex-container > div {
                                 margin: 20px;
                                 padding: 20px;
                                 font-size: 20px;
-                            }}
+                            }
 
                         </style>
                     </head>
                     <body>
                         <div class="text-container">
-                        <h1>{item["recipe_name"]["S"]}</h1>
+                        <h1>Blue Cheese Burgers</h1>
                         </div>
                         <div class="flex-container">
                         <div>
-                            <img src="{item["image"]["S"]}" alt="{item["image"]["S"]}">
+                            <img src="https://spoonacular.com/recipeImages/635350-556x370.jpg" alt="https://spoonacular.com/recipeImages/635350-556x370.jpg">
                         </div>
                         <div>
                             <h2>Nutrition</h2>
-                            <p>Calories: {item["calories"]["S"]}</p>
-                            <p>Fat: {item["fat"]["S"]}</p>
-                            <p>Carbohydrates: {item["carbohydrates"]["S"]}</p>
-                            <p>Protein: {item["protein"]["S"]}</p>
-                            <p>Gluten free: {item["glutenFree"]["S"]}</p>
-                            <p>Dairy free: {item["dairyFree"]["S"]}</p>
+                            <p>Calories: 658k</p>
+                            <p>Fat: 36g</p>
+                            <p>Carbohydrates: 33g</p>
+                            <p>Protein: 44g</p>
+                            <p>Gluten free: False</p>
+                            <p>Dairy free: False</p>
 
                         </div>
                         </div>
                         <div class="text-container">
                         <h2>Ingredients</h2>
                         <ul>
-            """)
-            for ingredient in item["ingredients"]["SS"]:
-                split_ingredient = ingredient.split(":")
-                if split_ingredient[2] is None:
-                    split_ingredient[2] = " "
-                my_file.write(f"<li>{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}</li>")
-            
-            my_file.write(
-                f"""
+            <li>113.398 g blue cheese</li><li>59.147 ml dry bread crumbs</li><li>1.0 large egg</li><li>0.5 tsps ground pepper</li><li>226.796 g ground sirloin</li><li>453.592 g ground sirloin</li><li>4.0  hamburger buns</li><li>0.75 tsps kosher salt</li><li>118.294 ml steak sauce</li>
                         </ul>
                     </div>
                     <div class="text-container">
                     <h2>Instructions</h2>
-                    <p>{item["instructions"]["S"]}</p> 
+                    <p>Step 1: In a bowl, add chuck, sirloin, bread crumbs, steak sauce, eggs, salt, and pepper, and mix gently with fork.
+Step 2: Form 4 patties out of this mixture.
+Step 3: Cook the hamburgers patties on each side, then cover with aluminium foil.
+Step 4: Cut the sides of the bun, then grill in a stove-top grill until toasted.
+Step 5: Place patties and a slice of blue cheese in each bun.
+Step 6: Serve hot.</p> 
                     </div>
                 </body>
                 </html>
-                """
-            )
-
-createhtml()
+                

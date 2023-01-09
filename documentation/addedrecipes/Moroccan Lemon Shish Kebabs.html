@@ -1,102 +1,86 @@
-import boto3
 
-def createhtml():
-    # Create a DynamoDB client
-    dynamodb = boto3.client("dynamodb")
-    # Get all recipe names from the DynamoDB table
-    response = dynamodb.scan(TableName="dev-meal-planner-MealPlannerDynamoDB-9O68NTU7Y19G")
-    #for recipe in response create a new html file
-    for item in response["Items"]:
-        filenamehere = item["recipe_name"]["S"]
-        filenamehere = filenamehere + ".html"
-        with open(filenamehere, 'w', encoding="utf-8") as my_file:
-            my_file.write(f"""
                 <html>
                     <head>
                         <title>Weekly Meal Recipe Subscription</title>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
                         <style>
                             body 
-                            {{
+                            {
                                 font-family: GFS Didot;
                                 background-color: #ffffff;
-                            }}
+                            }
 
                             .centerImage
-                            {{
+                            {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
                             
-                            h1 {{
+                            h1 {
                                 text-align: center;
-                            }}
+                            }
 
-                            .text-container {{
+                            .text-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
 
-                            .flex-container {{
+                            .flex-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
                                 display: flex;
-                            }}
+                            }
 
-                            .flex-container > div {{
+                            .flex-container > div {
                                 margin: 20px;
                                 padding: 20px;
                                 font-size: 20px;
-                            }}
+                            }
 
                         </style>
                     </head>
                     <body>
                         <div class="text-container">
-                        <h1>{item["recipe_name"]["S"]}</h1>
+                        <h1>Moroccan Lemon Shish Kebabs</h1>
                         </div>
                         <div class="flex-container">
                         <div>
-                            <img src="{item["image"]["S"]}" alt="{item["image"]["S"]}">
+                            <img src="https://spoonacular.com/recipeImages/652433-556x370.jpg" alt="https://spoonacular.com/recipeImages/652433-556x370.jpg">
                         </div>
                         <div>
                             <h2>Nutrition</h2>
-                            <p>Calories: {item["calories"]["S"]}</p>
-                            <p>Fat: {item["fat"]["S"]}</p>
-                            <p>Carbohydrates: {item["carbohydrates"]["S"]}</p>
-                            <p>Protein: {item["protein"]["S"]}</p>
-                            <p>Gluten free: {item["glutenFree"]["S"]}</p>
-                            <p>Dairy free: {item["dairyFree"]["S"]}</p>
+                            <p>Calories: 77k</p>
+                            <p>Fat: 2g</p>
+                            <p>Carbohydrates: 1g</p>
+                            <p>Protein: 12g</p>
+                            <p>Gluten free: True</p>
+                            <p>Dairy free: True</p>
 
                         </div>
                         </div>
                         <div class="text-container">
                         <h2>Ingredients</h2>
                         <ul>
-            """)
-            for ingredient in item["ingredients"]["SS"]:
-                split_ingredient = ingredient.split(":")
-                if split_ingredient[2] is None:
-                    split_ingredient[2] = " "
-                my_file.write(f"<li>{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}</li>")
-            
-            my_file.write(
-                f"""
+            <li>1.0 tsp black peppercorns</li><li>453.592 g boneless skinless chicken breast fillets</li><li>1.0 tsp fresh rosemary leaves</li><li>2.0 tsps fresh thyme leaves</li><li>2.0 cloves garlic</li><li>1.0  juice of lemon</li><li>1.0 serving lemon</li><li>2.0 tsps olive oil</li><li>1.0 tsp parsley</li>
                         </ul>
                     </div>
                     <div class="text-container">
                     <h2>Instructions</h2>
-                    <p>{item["instructions"]["S"]}</p> 
+                    <p>The chicken breast fillets trimmed of fat, cut into 1" cubes
+For Moroccan lemon marinade
+Put everything in a bowl
+Add this Marinated chicken cubes, mix well, cover with Plastic Wrap and let stand at least 1/2 hour before use ... I like to leave more time in the fridge
+The time for rest, place the bamboo skewers or metal rods in a tray with water (to cover only), that is to avoid burning
+Thread the meat on each rod are more or less as 4 pieces of meat
+Shish Kebbab cooking on the grill, skillet or the oven ... I like the first option, you know the smell of charcoal, wood ...
+Once the Shish Kebab cooked, serve immediately on a bed of Rice, Mediterranean Cous Cous, etc. ... or only with Pita Bread and ready</p> 
                     </div>
                 </body>
                 </html>
-                """
-            )
-
-createhtml()
+                

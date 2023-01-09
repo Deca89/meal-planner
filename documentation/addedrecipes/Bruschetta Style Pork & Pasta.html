@@ -1,102 +1,79 @@
-import boto3
 
-def createhtml():
-    # Create a DynamoDB client
-    dynamodb = boto3.client("dynamodb")
-    # Get all recipe names from the DynamoDB table
-    response = dynamodb.scan(TableName="dev-meal-planner-MealPlannerDynamoDB-9O68NTU7Y19G")
-    #for recipe in response create a new html file
-    for item in response["Items"]:
-        filenamehere = item["recipe_name"]["S"]
-        filenamehere = filenamehere + ".html"
-        with open(filenamehere, 'w', encoding="utf-8") as my_file:
-            my_file.write(f"""
                 <html>
                     <head>
                         <title>Weekly Meal Recipe Subscription</title>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
                         <style>
                             body 
-                            {{
+                            {
                                 font-family: GFS Didot;
                                 background-color: #ffffff;
-                            }}
+                            }
 
                             .centerImage
-                            {{
+                            {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
                             
-                            h1 {{
+                            h1 {
                                 text-align: center;
-                            }}
+                            }
 
-                            .text-container {{
+                            .text-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
 
-                            .flex-container {{
+                            .flex-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
                                 display: flex;
-                            }}
+                            }
 
-                            .flex-container > div {{
+                            .flex-container > div {
                                 margin: 20px;
                                 padding: 20px;
                                 font-size: 20px;
-                            }}
+                            }
 
                         </style>
                     </head>
                     <body>
                         <div class="text-container">
-                        <h1>{item["recipe_name"]["S"]}</h1>
+                        <h1>Bruschetta Style Pork & Pasta</h1>
                         </div>
                         <div class="flex-container">
                         <div>
-                            <img src="{item["image"]["S"]}" alt="{item["image"]["S"]}">
+                            <img src="https://spoonacular.com/recipeImages/715538-556x370.jpg" alt="https://spoonacular.com/recipeImages/715538-556x370.jpg">
                         </div>
                         <div>
                             <h2>Nutrition</h2>
-                            <p>Calories: {item["calories"]["S"]}</p>
-                            <p>Fat: {item["fat"]["S"]}</p>
-                            <p>Carbohydrates: {item["carbohydrates"]["S"]}</p>
-                            <p>Protein: {item["protein"]["S"]}</p>
-                            <p>Gluten free: {item["glutenFree"]["S"]}</p>
-                            <p>Dairy free: {item["dairyFree"]["S"]}</p>
+                            <p>Calories: 521k</p>
+                            <p>Fat: 10g</p>
+                            <p>Carbohydrates: 69g</p>
+                            <p>Protein: 35g</p>
+                            <p>Gluten free: False</p>
+                            <p>Dairy free: False</p>
 
                         </div>
                         </div>
                         <div class="text-container">
                         <h2>Ingredients</h2>
                         <ul>
-            """)
-            for ingredient in item["ingredients"]["SS"]:
-                split_ingredient = ingredient.split(":")
-                if split_ingredient[2] is None:
-                    split_ingredient[2] = " "
-                my_file.write(f"<li>{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}</li>")
-            
-            my_file.write(
-                f"""
+            <li>709.764 ml bow tie pasta</li><li>118.294 ml parmigiano reggiano</li><li>5.0 servings pasta</li><li>453.592 g pork chops</li>
                         </ul>
                     </div>
                     <div class="text-container">
                     <h2>Instructions</h2>
-                    <p>{item["instructions"]["S"]}</p> 
+                    <p>wash and rinse pork chops and place into the skillet.cut them into bite sized pieces and add half of the Basil Garlic simmer sauce.boil your water and start working on cooking your bow-tie pasta.when you have finished with boiling and draining your pasta, add it to the pork along with the rest of the Basil Garlic Simmering Sauce, mixing lightly.Next you will top with the Chunky Bruschetta Finishing Sauce, cover with Parmesan, and cover. Cooking on low heat 2 to 3 minutes or until heated through.</p> 
                     </div>
                 </body>
                 </html>
-                """
-            )
-
-createhtml()
+                

@@ -1,102 +1,79 @@
-import boto3
 
-def createhtml():
-    # Create a DynamoDB client
-    dynamodb = boto3.client("dynamodb")
-    # Get all recipe names from the DynamoDB table
-    response = dynamodb.scan(TableName="dev-meal-planner-MealPlannerDynamoDB-9O68NTU7Y19G")
-    #for recipe in response create a new html file
-    for item in response["Items"]:
-        filenamehere = item["recipe_name"]["S"]
-        filenamehere = filenamehere + ".html"
-        with open(filenamehere, 'w', encoding="utf-8") as my_file:
-            my_file.write(f"""
                 <html>
                     <head>
                         <title>Weekly Meal Recipe Subscription</title>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
                         <style>
                             body 
-                            {{
+                            {
                                 font-family: GFS Didot;
                                 background-color: #ffffff;
-                            }}
+                            }
 
                             .centerImage
-                            {{
+                            {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
                             
-                            h1 {{
+                            h1 {
                                 text-align: center;
-                            }}
+                            }
 
-                            .text-container {{
+                            .text-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
 
-                            .flex-container {{
+                            .flex-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
                                 display: flex;
-                            }}
+                            }
 
-                            .flex-container > div {{
+                            .flex-container > div {
                                 margin: 20px;
                                 padding: 20px;
                                 font-size: 20px;
-                            }}
+                            }
 
                         </style>
                     </head>
                     <body>
                         <div class="text-container">
-                        <h1>{item["recipe_name"]["S"]}</h1>
+                        <h1>Peanut Butter and Jelly Smoothie</h1>
                         </div>
                         <div class="flex-container">
                         <div>
-                            <img src="{item["image"]["S"]}" alt="{item["image"]["S"]}">
+                            <img src="https://spoonacular.com/recipeImages/655235-556x370.jpg" alt="https://spoonacular.com/recipeImages/655235-556x370.jpg">
                         </div>
                         <div>
                             <h2>Nutrition</h2>
-                            <p>Calories: {item["calories"]["S"]}</p>
-                            <p>Fat: {item["fat"]["S"]}</p>
-                            <p>Carbohydrates: {item["carbohydrates"]["S"]}</p>
-                            <p>Protein: {item["protein"]["S"]}</p>
-                            <p>Gluten free: {item["glutenFree"]["S"]}</p>
-                            <p>Dairy free: {item["dairyFree"]["S"]}</p>
+                            <p>Calories: 513k</p>
+                            <p>Fat: 34g</p>
+                            <p>Carbohydrates: 42g</p>
+                            <p>Protein: 18g</p>
+                            <p>Gluten free: True</p>
+                            <p>Dairy free: True</p>
 
                         </div>
                         </div>
                         <div class="text-container">
                         <h2>Ingredients</h2>
                         <ul>
-            """)
-            for ingredient in item["ingredients"]["SS"]:
-                split_ingredient = ingredient.split(":")
-                if split_ingredient[2] is None:
-                    split_ingredient[2] = " "
-                my_file.write(f"<li>{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}</li>")
-            
-            my_file.write(
-                f"""
+            <li>236.588 ml almond milk</li><li>2.0  bananas</li><li>118.294 ml peanut butter</li><li>118.294 ml strawberries</li>
                         </ul>
                     </div>
                     <div class="text-container">
                     <h2>Instructions</h2>
-                    <p>{item["instructions"]["S"]}</p> 
+                    <p><ol><li>Place ingredients in a high speed blender like Blendtec for super smooth texture, blend on high.</li><li>If using a regular blender put milk and strawberries in then blend.</li><li>Next, add banana pieces and peanut butter, process until smooth.</li><li>Garnish with crushed peanuts and serve.</li></ol></p> 
                     </div>
                 </body>
                 </html>
-                """
-            )
-
-createhtml()
+                

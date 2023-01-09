@@ -1,102 +1,84 @@
-import boto3
 
-def createhtml():
-    # Create a DynamoDB client
-    dynamodb = boto3.client("dynamodb")
-    # Get all recipe names from the DynamoDB table
-    response = dynamodb.scan(TableName="dev-meal-planner-MealPlannerDynamoDB-9O68NTU7Y19G")
-    #for recipe in response create a new html file
-    for item in response["Items"]:
-        filenamehere = item["recipe_name"]["S"]
-        filenamehere = filenamehere + ".html"
-        with open(filenamehere, 'w', encoding="utf-8") as my_file:
-            my_file.write(f"""
                 <html>
                     <head>
                         <title>Weekly Meal Recipe Subscription</title>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
                         <style>
                             body 
-                            {{
+                            {
                                 font-family: GFS Didot;
                                 background-color: #ffffff;
-                            }}
+                            }
 
                             .centerImage
-                            {{
+                            {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
                             
-                            h1 {{
+                            h1 {
                                 text-align: center;
-                            }}
+                            }
 
-                            .text-container {{
+                            .text-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
 
-                            .flex-container {{
+                            .flex-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
                                 display: flex;
-                            }}
+                            }
 
-                            .flex-container > div {{
+                            .flex-container > div {
                                 margin: 20px;
                                 padding: 20px;
                                 font-size: 20px;
-                            }}
+                            }
 
                         </style>
                     </head>
                     <body>
                         <div class="text-container">
-                        <h1>{item["recipe_name"]["S"]}</h1>
+                        <h1>Zucchini Ribbon and Ricotta Pizza</h1>
                         </div>
                         <div class="flex-container">
                         <div>
-                            <img src="{item["image"]["S"]}" alt="{item["image"]["S"]}">
+                            <img src="https://spoonacular.com/recipeImages/665779-556x370.jpg" alt="https://spoonacular.com/recipeImages/665779-556x370.jpg">
                         </div>
                         <div>
                             <h2>Nutrition</h2>
-                            <p>Calories: {item["calories"]["S"]}</p>
-                            <p>Fat: {item["fat"]["S"]}</p>
-                            <p>Carbohydrates: {item["carbohydrates"]["S"]}</p>
-                            <p>Protein: {item["protein"]["S"]}</p>
-                            <p>Gluten free: {item["glutenFree"]["S"]}</p>
-                            <p>Dairy free: {item["dairyFree"]["S"]}</p>
+                            <p>Calories: 1987k</p>
+                            <p>Fat: 42g</p>
+                            <p>Carbohydrates: 331g</p>
+                            <p>Protein: 68g</p>
+                            <p>Gluten free: False</p>
+                            <p>Dairy free: False</p>
 
                         </div>
                         </div>
                         <div class="text-container">
                         <h2>Ingredients</h2>
                         <ul>
-            """)
-            for ingredient in item["ingredients"]["SS"]:
-                split_ingredient = ingredient.split(":")
-                if split_ingredient[2] is None:
-                    split_ingredient[2] = " "
-                my_file.write(f"<li>{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}</li>")
-            
-            my_file.write(
-                f"""
+            <li>1.0  garlic clove</li><li>0.125 tsps ground pepper</li><li>29.573 ml kalamata olives</li><li>2.0 tsps lemon zest</li><li>1.0 Tbsp olive oil</li><li>59.147 ml parmesan cheese</li><li>1.0 Tbsp pine nuts</li><li>12.0 inch pizza crust</li><li>118.294 ml ricotta cheese</li><li>0.125 tsps salt</li><li>1.0 small zucchini</li>
                         </ul>
                     </div>
                     <div class="text-container">
                     <h2>Instructions</h2>
-                    <p>{item["instructions"]["S"]}</p> 
+                    <p>Preheat your oven according to the pizza crust package directions.
+In a medium-sized bowl, combine the zucchini, olive oil, garlic, lemon zest and salt and pepper. Toss to combine well.
+Dollop the ricotta cheese around the pizza crust and spread it out slightly.
+Mound the zucchini over the cheese, then sprinkle the olives evenly over the zucchini.
+Sprinkle on the pine nuts, then the Parmesan cheese.
+Bake according to the pizza crust instructions. The cheese should be slightly melted and the crust crispy.</p> 
                     </div>
                 </body>
                 </html>
-                """
-            )
-
-createhtml()
+                

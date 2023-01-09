@@ -1,102 +1,79 @@
-import boto3
 
-def createhtml():
-    # Create a DynamoDB client
-    dynamodb = boto3.client("dynamodb")
-    # Get all recipe names from the DynamoDB table
-    response = dynamodb.scan(TableName="dev-meal-planner-MealPlannerDynamoDB-9O68NTU7Y19G")
-    #for recipe in response create a new html file
-    for item in response["Items"]:
-        filenamehere = item["recipe_name"]["S"]
-        filenamehere = filenamehere + ".html"
-        with open(filenamehere, 'w', encoding="utf-8") as my_file:
-            my_file.write(f"""
                 <html>
                     <head>
                         <title>Weekly Meal Recipe Subscription</title>
                         <meta name="viewport" content="width=device-width, initial-scale=1">
                         <style>
                             body 
-                            {{
+                            {
                                 font-family: GFS Didot;
                                 background-color: #ffffff;
-                            }}
+                            }
 
                             .centerImage
-                            {{
+                            {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
                             
-                            h1 {{
+                            h1 {
                                 text-align: center;
-                            }}
+                            }
 
-                            .text-container {{
+                            .text-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
-                            }}
+                            }
 
-                            .flex-container {{
+                            .flex-container {
                                 display: block;
                                 margin-left: auto;
                                 margin-right: auto;
                                 width: 50%;
                                 display: flex;
-                            }}
+                            }
 
-                            .flex-container > div {{
+                            .flex-container > div {
                                 margin: 20px;
                                 padding: 20px;
                                 font-size: 20px;
-                            }}
+                            }
 
                         </style>
                     </head>
                     <body>
                         <div class="text-container">
-                        <h1>{item["recipe_name"]["S"]}</h1>
+                        <h1>Yoghurt Chicken and Garlic Potatoes</h1>
                         </div>
                         <div class="flex-container">
                         <div>
-                            <img src="{item["image"]["S"]}" alt="{item["image"]["S"]}">
+                            <img src="https://spoonacular.com/recipeImages/716356-556x370.jpg" alt="https://spoonacular.com/recipeImages/716356-556x370.jpg">
                         </div>
                         <div>
                             <h2>Nutrition</h2>
-                            <p>Calories: {item["calories"]["S"]}</p>
-                            <p>Fat: {item["fat"]["S"]}</p>
-                            <p>Carbohydrates: {item["carbohydrates"]["S"]}</p>
-                            <p>Protein: {item["protein"]["S"]}</p>
-                            <p>Gluten free: {item["glutenFree"]["S"]}</p>
-                            <p>Dairy free: {item["dairyFree"]["S"]}</p>
+                            <p>Calories: 1165k</p>
+                            <p>Fat: 18g</p>
+                            <p>Carbohydrates: 134g</p>
+                            <p>Protein: 112g</p>
+                            <p>Gluten free: True</p>
+                            <p>Dairy free: False</p>
 
                         </div>
                         </div>
                         <div class="text-container">
                         <h2>Ingredients</h2>
                         <ul>
-            """)
-            for ingredient in item["ingredients"]["SS"]:
-                split_ingredient = ingredient.split(":")
-                if split_ingredient[2] is None:
-                    split_ingredient[2] = " "
-                my_file.write(f"<li>{split_ingredient[1]} {split_ingredient[2]} {split_ingredient[0]}</li>")
-            
-            my_file.write(
-                f"""
+            <li>1.0 tsp butter</li><li>2.0  chicken breasts</li><li>0.5 tsps chilli powder</li><li>1.0 tsp curry paste</li><li>2.0  garlic cloves</li><li>0.5 tsps ginger powder</li><li>2.0  ice cubes</li><li>1.0 handful onions</li><li>2.0 large potatoes</li><li>78.863 ml water</li><li>2.0 Tbsps yoghurt</li>
                         </ul>
                     </div>
                     <div class="text-container">
                     <h2>Instructions</h2>
-                    <p>{item["instructions"]["S"]}</p> 
+                    <p>Blend the yoghurt, curry, seasoning cubes, ginger powder, chilli powder and water together.Pour over chicken and leave to marinate for a few hours. (2~3 hours should be fine)Heat up the oven to 380F, sprInkle the marinated chicken with the sliced onions and place the chicken to cook for 35~40 minutes.In a pot, wash your potatoes and place in the pot to boil.Crush your garlic cloves and mix with the butter.Once the potatoes are soft, drain the water out, rub the garlic butter on the potatoes and sprinkle your basil leaves on it, I boiled my potatoes with its skin because I wanted the extra fibre content.Serve with the chicken when its ready. </p> 
                     </div>
                 </body>
                 </html>
-                """
-            )
-
-createhtml()
+                
