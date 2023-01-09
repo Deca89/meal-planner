@@ -36,8 +36,81 @@ def lambda_handler(event, context):
         stop=None,
         temperature=0.5,
     )
+    message = f"""
+    <html>
+  <head>
+    <title>{event['queryStringParameters']['food']}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {{
+        font-family: Arial, sans-serif;
+        background-color: #f1f1f1;
+      }}
 
-    message = completions.choices[0].text
+      h1 {{
+        text-align: center;
+      }}
+
+      .form-container {{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }}
+
+      .form-container label {{
+        font-weight: 600;
+        margin-bottom: 5px;
+      }}
+
+      .form-container input[type="text"],
+      .form-container select {{
+        width: 90%;
+        max-width: 400px;
+        padding: 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }}
+
+      .form-container input[type="submit"] {{
+        width: 100%;
+        max-width: 200px;
+        background-color: #4CAF50;
+        color: white;
+        padding: 14px 20px;
+        margin: 8px 0;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }}
+
+      .form-container input[type="submit"]:hover {{
+        background-color: #45a049;
+      }}
+
+      .image-container {{
+        display: flex;
+        justify-content: space-around;
+        margin: 20px 0;
+      }}
+
+      .image-container img {{
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+      }}
+    </style>
+  </head>
+  <body>
+    <h1>{event['queryStringParameters']['food']}</h1>
+    {completions.choices[0].text}
+    <div class="image-container">
+      <img src="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/image1.jpg" alt="Image 1">
+      <img src="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/image2.jpg" alt="Image 2">
+      <img src="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/image3.jpg" alt="Image 3">
+    </div>
+  </body>
+  </html>"""
 
     return {
         'statusCode': 200,
