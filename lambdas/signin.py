@@ -1,7 +1,7 @@
 import boto3
 import base64
 
-def login(event, context):
+def lambda_handler(event, context):
     email = event["email"]
     password = event["password"]
     
