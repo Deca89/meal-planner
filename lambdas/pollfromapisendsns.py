@@ -73,8 +73,9 @@ def lambda_handler(event, context):
         # Add the shopping list to the message
     message += "\nShopping List:\n"
     for ingredient in shopping_list:
-        message += f"- {ingredient}\n"  
-        amounts = unit[ingredient].split(":")  
+        message += f"- {ingredient}\n"
+        amounts = unit[ingredient]  
+        amounts = amounts.split(":")  
         for unit in amounts:
             message += f"   - {unit}\n"  
    
