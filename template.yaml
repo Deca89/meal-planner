@@ -42,22 +42,36 @@ Resources:
       ProvisionedThroughput: 
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
-    
-  AccountsDynamoDB:
+
+  AccountsDynamoDB: 
     Type: AWS::DynamoDB::Table
-    Properties:
-      AttributeDefinitions:
-        - 
-          AttributeName: "Email"
+    Properties: 
+      AttributeDefinitions: 
+        -
+          AttributeName: "email"
           AttributeType: "S"
-      KeySchema:
         - 
-          AttributeName: "Email"
-          KeyType: "HASH" 
-      ProvisionedThroughput:
+          AttributeName: "id"
+          AttributeType: "N"
+        -
+          AttributeName: "email"
+          AttributeType: "S"
+      KeySchema: 
+        - 
+          AttributeName: "email"
+          KeyType: "HASH"
+        -
+          AttributeName: "id"
+          KeyType: "RANGE"
+        -
+          AttributeName: "password"
+          KeyType: "HASH"
+      BillingMode: PROVISIONED
+      ProvisionedThroughput: 
         ReadCapacityUnits: "1"
         WriteCapacityUnits: "1"
-      TableName: AccountsDynamoDB
+    
+
 
   AddClientToSNS:
     Type: AWS::Serverless::Function # More info about Function Resource: https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlessfunction
