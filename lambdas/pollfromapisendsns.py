@@ -52,14 +52,14 @@ def lambda_handler(event, context):
         recipe_names.add(recipe_name)
 
     # Create a message with the recipes in a readable format
-    message = "\033[92m Recipes\033[0m:\n\n"
+    message = " Recipes:\n\n"
     for i, recipe in enumerate(recipes):
-        message += f"{i+1}. {recipe['recipe_name']}\n\n"
+        message += f"{i+1}." + '\033[92m' + f"{recipe['recipe_name']}" + '\033[0m' + "\n\n"
         message += "Nutrition:\n\n"
         message += f"Calories: {recipe['calories']}\n"
         message += f"Carbohydrates: {recipe['carbohydrates']}\n"
         message += f"Protein: {recipe['protein']}\n"
-        message += f"Fat: {recipe['fat']}\n"
+        message += f"Fat: {recipe['fat']}\n\n"
         message += "Ingredients:\n\n"
         for ingredient in recipe['ingredients']:
             message += f"- {ingredient}\n"
