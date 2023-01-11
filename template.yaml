@@ -47,10 +47,12 @@ Resources:
     Type: AWS::DynamoDB::Table
     Properties:
       AttributeDefinitions:
-        - AttributeName: "id"
+        - 
+          AttributeName: "Email"
           AttributeType: "S"
       KeySchema:
-        - AttributeName: "id"
+        - 
+          AttributeName: "Email"
           KeyType: "HASH" 
       ProvisionedThroughput:
         ReadCapacityUnits: "1"
