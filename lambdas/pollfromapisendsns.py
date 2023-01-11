@@ -39,8 +39,6 @@ def lambda_handler(event, context):
             else:
                 shopping_list.append(split_ingredient[0].lower())
                 unit[split_ingredient[0].lower()] = f"{split_ingredient[1]} {split_ingredient[2]}"
-
-            shopping_list.append(split_ingredient[0])
         instructions = recipe["instructions"]["S"]
         recipes.append({
             "recipe_name": recipe_name,
@@ -54,21 +52,22 @@ def lambda_handler(event, context):
         recipe_names.add(recipe_name)
 
     # Create a message with the recipes in a readable format
-    message = "Recipes:\n\n"
+    message = "\033[92m Recipes\033[0m:\n\n"
     for i, recipe in enumerate(recipes):
-        message += f"{i+1}. {recipe['recipe_name']}\n"
-        message += "Nutrition:\n"
+        message += f"{i+1}. {recipe['recipe_name']}\n\n"
+        message += "Nutrition:\n\n"
         message += f"Calories: {recipe['calories']}\n"
         message += f"Carbohydrates: {recipe['carbohydrates']}\n"
         message += f"Protein: {recipe['protein']}\n"
         message += f"Fat: {recipe['fat']}\n"
-        message += "Ingredients:\n"
+        message += "Ingredients:\n\n"
         for ingredient in recipe['ingredients']:
             message += f"- {ingredient}\n"
+        message += "\n"
         message += f"Instructions:\n{recipe['instructions']}\n\n"
         namelink = recipe['recipe_name']
         namelink = namelink.replace(" ", "+")
-        message += f"Link to the recipe: https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/recipes/{namelink}.html"
+        message += f"Link to the recipe: https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/recipes/{namelink}.html \n\n\n\n"
 
         # Add the shopping list to the message
     message += "\nShopping List:\n"
@@ -76,8 +75,8 @@ def lambda_handler(event, context):
         message += f"- {ingredient}\n"
         amounts = unit[ingredient]  
         amounts = amounts.split(":")  
-        for unit in amounts:
-            message += f"   - {unit}\n"  
+        for amount in amounts:
+            message += f"   - {amount}\n"  
    
     # delete html code from instructions section    
     message = message.replace("<ol>", "")
