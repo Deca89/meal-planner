@@ -54,7 +54,7 @@ Resources:
           AttributeName: "id"
           AttributeType: "N"
         -
-          AttributeName: "email"
+          AttributeName: "password"
           AttributeType: "S"
       KeySchema: 
         - 
