@@ -69,7 +69,9 @@
       width: 100%; /* make the topbar take up the full width of the page */
       z-index: 9999; /* make the topbar appear above other elements on the page */
     }
+
  
+
     #topbar a {
       float: left;
       color: #f2f2f2;
@@ -78,41 +80,44 @@
       text-decoration: none;
       font-size: 17px;
     }
+
  
+
     #topbar a:hover {
       background-color: #ddd;
       color: black;
     }
+
  
+
     #topbar a.active {
       background-color: #4CAF50;
       color: white;
     }
     </style>
   </head>
-  <div id="topbar">
-    <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/index.html">Home</a>
-    <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/recipes.html">Recipes</a>
-    <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/subscription.html">Subscription</a>
-    <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/recipes/index.html">Recipe Maker</a>
-    <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/createaccount.html">Create Account</a>
-    <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/signin.html">Sign In</a>
-  </div>
   <body>
-    <h1></h1>
-    <div style="text-align: center;">
-        <img src="image4.jpg" alt="Image 4" style="margin: auto;">
+    <div id="topbar">
+      <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/index.html">Home</a>
+      <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/recipes.html">Recipes</a>
+      <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/subscription.html">Subscription</a>
+      <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/recipes/index.html">Recipe Maker</a>
+      <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/createaccount.html">Create Account</a>
+      <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/signin.html">Sign In</a>
     </div>
-    <h1>Sign in to your account</h1>
+    <div style="text-align: center;">
+      <img src="image4.jpg" alt="Image 4" style="margin: auto;">
+  </div>
+    <h1>Create your favourite recipes!</h1>
     <div class="form-container">
-      <p>Please fill your email address and password to sign in:</p>
-      <form action="https://nbtpsvadxh.execute-api.eu-west-1.amazonaws.com/Prod/addclient" method="get">
-        <label for="email">Email:</label><br>
-        <input type="text" id="email" name="email"><br>
-        <label for="diet">Password:</label><br>
-        <input type="text" id="password" name="password"><br>
-        <input type="submit" value="Sign in">
+      <p>Enter whatever meal you wish a recipe for and we'll do our best to create a recipe just for you!</p>
+      <form action="https://nbtpsvadxh.execute-api.eu-west-1.amazonaws.com/Prod/randomdish" method="get">
+        <label for="food">Food:</label><br>
+        <input type="text" id="food" name="food"><br>
+        </select><br>
+        <input type="submit" value="Create">
       </form>
+      <p>This may take up to 30 seconds! Please be patient.</p>
     </div>
     <div class="image-container">
       <img src="image1.jpg" alt="Image 1">
