@@ -53,9 +53,7 @@ Resources:
         - 
           AttributeName: "id"
           AttributeType: "N"
-        -
-          AttributeName: "password"
-          AttributeType: "S"
+     
       KeySchema: 
         - 
           AttributeName: "email"
@@ -63,9 +61,7 @@ Resources:
         -
           AttributeName: "id"
           KeyType: "RANGE"
-        -
-          AttributeName: "password"
-          KeyType: "HASH"
+
       BillingMode: PROVISIONED
       ProvisionedThroughput: 
         ReadCapacityUnits: "1"
