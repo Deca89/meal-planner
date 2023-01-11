@@ -99,27 +99,29 @@
     <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/signin.html">Sign In</a>
   </div>
   <body>
+    <!-- <div class ="form-container">
+      <input type="button" value="Create Account" onclick="createAccount()">
+      <input type="button" value="Sign In" onclick="login()">
+    </div> -->
     <h1></h1>
     <div style="text-align: center;">
         <img src="image4.jpg" alt="Image 4" style="margin: auto;">
     </div>
+    <h1></h1>
+    <h1>Weekly Meal Recipe Subscription</h1>
     <div class="form-container">
-        <div style="text-align: center;">
-            <h1 id="welcome-text">Welcome!</h1>
-            <p>
-                Have you ever wondered how to make your life easier? 
-                Are you feeling distress when monday is behind the corner?
-                Do you have a family that doesn't give you the time to plan weeks meals or won't participate?
-                Did you know that there is a way to make your life easier?<br><br>
-                We can make the dream come true with Meal-Planner!<br><br>
-                By subscribing to <a href="https://prod-meal-planner-mystaticwebsitebucket-n1r2dxocn1hw.s3.eu-west-1.amazonaws.com/subscription.html" class="subscription-link">Meal-Planner</a> you recieve 7 meals once a week and safe your time for yourself or the family.
-                You will get a shopping list of all the ingredients so you don't have to wonder around the grocery store.
-                Planning ahead will reduce food loss and your bank account will look richer than before.<br><br>
-                The Meal-Planner has a feature for you to add your favorite food to your account so you can make your delicious recipes!
-                There is an Artificial Intelligence that can give you any <a href="https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/recipes/index.html"> recipe</a> that you want in any moment!<br><br>
-                Get familiar with Meal-Planner and you will save time, money and you won't have to eat the same food ever again, unless you want to.
-            </p>
-        </div>
+      <p>Enter your email address and select the type of recipes you want to receive to subscribe to our weekly meal recipe email list:</p>
+      <form action="https://nbtpsvadxh.execute-api.eu-west-1.amazonaws.com/Prod/addclient" method="get">
+        <label for="email">Email:</label><br>
+        <input type="text" id="email" name="email"><br>
+        <label for="diet">Recipe Type:</label><br>
+        <select id="diet" name="diet">
+          <option value="all-recipes">All Recipes</option>
+          <option value="vegan">Vegan Recipes</option>
+          <option value="vegetarian">Vegetarian Recipes</option>
+        </select><br>
+        <input type="submit" value="Subscribe">
+      </form>
     </div>
     <div class="image-container">
       <img src="image1.jpg" alt="Image 1">
