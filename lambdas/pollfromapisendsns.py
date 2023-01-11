@@ -66,12 +66,15 @@ def lambda_handler(event, context):
         for ingredient in recipe['ingredients']:
             message += f"- {ingredient}\n"
         message += f"Instructions:\n{recipe['instructions']}\n\n"
+        namelink = recipe['recipe_name']
+        namelink = namelink.replace(" ", "+")
+        message += f"Link to the recipe: https://dev-meal-planner-mystaticwebsitebucket-gf7syi2enoia.s3.eu-west-1.amazonaws.com/recipes/{namelink}.html"
 
         # Add the shopping list to the message
     message += "\nShopping List:\n"
     for ingredient in shopping_list:
         message += f"- {ingredient}\n"  
-        amounts = ingredient.split(";")  
+        amounts = unit[ingredient].split(":")  
         for unit in amounts:
             message += f"   - {unit}\n"  
    
@@ -82,6 +85,8 @@ def lambda_handler(event, context):
     message = message.replace("</li>", "")
     message = message.replace("<p>", "")
     message = message.replace("</p>", "")
+    message = message.replace("<span>", "")
+    message = message.replace("</span>", "")
 
     
     # Send the message to the SNS topic
