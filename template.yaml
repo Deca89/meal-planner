@@ -156,7 +156,11 @@ Resources:
           - x86_64
         Policies:
           - AWSLambda_FullAccess
-  
+          - AmazonDynamoDBFullAccess
+        Environment:
+          Variables:
+            CreateAccount: !Ref AccountsDynamoDB
+              
 
   MySNSTopicMealPlanner:
     Type: AWS::SNS::Topic
