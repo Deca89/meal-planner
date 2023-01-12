@@ -140,7 +140,7 @@ Resources:
           Properties:
             Path: /randomdish
             Method: get
-  CreateAccount:
+  CreateAccountApi:
     Type: AWS::Serveless::Function
     Properties:
       CodeUri: lambdas/
@@ -177,6 +177,9 @@ Resources:
           Properties:
             Path: /accounts
             Method: get
+      Enviroment:
+      Variables:
+        Sigin: !Ref AccountsDynamoDB
 
 
 
