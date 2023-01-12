@@ -18,15 +18,15 @@ def lambda_handler(event, context):
 
 
     item = response["Item"]
-    encrypted_password = item["password"]
+    passworddb = item["password"]
     
-    kms = boto3.client("kms")
-    response = kms.decrypt(CiphertextBlob=encrypted_password
-    )
-    decrypted_password = response["Plaintext"]
-    decrypted_password = base64.b64decode(decrypted_password).decode()
+    # kms = boto3.client("kms")
+    # response = kms.decrypt(CiphertextBlob=encrypted_password
+    # )
+    # decrypted_password = response["Plaintext"]
+    # decrypted_password = base64.b64decode(decrypted_password).decode()
     
-    if password == decrypted_password:
+    if passworddb == password:
         return {
             "message": "Login successful"
         }

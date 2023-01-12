@@ -12,19 +12,19 @@ def lambda_handler(event, context):
             "body": "Passwords do not match"
         }
     
-    kms = boto3.client("kms")
-    response = kms.encrypt(
-        KeyId="alias/<key-alias>",
-        Plaintext=password
-    )
-    encrypted_password = response["CiphertextBlob"]
+    # kms = boto3.client("kms")
+    # response = kms.encrypt(
+    #     KeyId="alias/<key-alias>",
+    #     Plaintext=password
+    # )
+    # encrypted_password = response["CiphertextBlob"]
     
     dynamodb = boto3.resource("dynamodb")
     table = dynamodb.Table(os.environ["CreateAccount"])
     table.put_item(
         Item={
             "email": email,
-            "password": encrypted_password
+            "password": password
         }
     )
     
