@@ -141,7 +141,7 @@ Resources:
             Path: /randomdish
             Method: get
   CreateAccountApi:
-    Type: AWS::Serveless::Function
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: lambdas/
       Handler: createaccount.lambda_handler
@@ -161,7 +161,7 @@ Resources:
         Variables:
           CreateAccount: !Ref AccountsDynamoDB
   SigninApi:
-    Type: AWS::Serveless::Function
+    Type: AWS::Serverless::Function
     Properties:
       CodeUri: lambdas/
       Handler: signin.lambda_handler
@@ -178,8 +178,8 @@ Resources:
             Path: /accounts
             Method: get
       Enviroment:
-      Variables:
-        Sigin: !Ref AccountsDynamoDB
+        Variables:
+          Signin: !Ref AccountsDynamoDB
 
 
 

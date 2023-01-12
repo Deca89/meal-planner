@@ -7,7 +7,7 @@ def lambda_handler(event, context):
     password = event['queryStringParameters']['password']
     
     dynamodb = boto3.resource("dynamodb")
-    table = dynamodb.Table(os.environ["CreateAccount"])
+    table = dynamodb.Table(os.environ["Signin"])
     response = table.get_item(
         Key={
             "email": {
