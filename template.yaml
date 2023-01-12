@@ -175,7 +175,7 @@ Resources:
         Signin:
           Type: Api
           Properties:
-            Path: /accounts
+            Path: /sign
             Method: get
       Environment:
         Variables:
