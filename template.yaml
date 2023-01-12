@@ -177,7 +177,7 @@ Resources:
           Properties:
             Path: /accounts
             Method: get
-      Enviroment:
+      Environment:
         Variables:
           Signin: !Ref AccountsDynamoDB
 
