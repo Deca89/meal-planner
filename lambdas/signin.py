@@ -1,17 +1,22 @@
 import boto3
 import base64
+import os
 
 def lambda_handler(event, context):
-    email = event["email"]
-    password = event["password"]
+    email = event['queryStringParameters']['email']
+    password = event['queryStringParameters']['password']
     
     dynamodb = boto3.resource("dynamodb")
-    table = dynamodb.Table("Accounts")
+    table = dynamodb.Table(os.environ["CreateAccount"])
     response = table.get_item(
         Key={
-            "email": email
+            "email": {
+                "S": email
+            }
         }
     )
+
+
     item = response["Item"]
     encrypted_password = item["password"]
     
