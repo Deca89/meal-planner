@@ -140,43 +140,43 @@ Resources:
           Properties:
             Path: /randomdish
             Method: get
-    CreateAccount:
-      Type: AWS::Serveless::Function
-      Properties:
-        CodeUri: lambdas/
-        Handler: createaccount.lambda_handler
-        Runtime: python3.9
-        Architectures:
-          - x86_64
-        Policies:
-          - AWSLambda_FullAccess
-          - AmazonDynamoDBFullAccess
-        Events:
-          CreateAccount:
-            Type: Api
-            Properties:
-              Path: /accounts
-              Method: get
-        Environment:
-          Variables:
-            CreateAccount: !Ref AccountsDynamoDB
-    SigninApi:
-      Type: AWS::Serveless::Function
-      Properties:
-        CodeUri: lambdas/
-        Handler: signin.lambda_handler
-        Runtime: python3.9
-        Architectures:
-          - x86_64
-        Policies:
-          - AWSLambda_FullAccess
-          - AmazonDynamoDBFullAccess
-        Events:
-          Signin:
-            Type: Api
-            Properties:
-              Path: /accounts
-              Method: get
+  CreateAccount:
+    Type: AWS::Serveless::Function
+    Properties:
+      CodeUri: lambdas/
+      Handler: createaccount.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Policies:
+        - AWSLambda_FullAccess
+        - AmazonDynamoDBFullAccess
+      Events:
+        CreateAccount:
+          Type: Api
+          Properties:
+            Path: /accounts
+            Method: get
+      Environment:
+        Variables:
+          CreateAccount: !Ref AccountsDynamoDB
+  SigninApi:
+    Type: AWS::Serveless::Function
+    Properties:
+      CodeUri: lambdas/
+      Handler: signin.lambda_handler
+      Runtime: python3.9
+      Architectures:
+        - x86_64
+      Policies:
+        - AWSLambda_FullAccess
+        - AmazonDynamoDBFullAccess
+      Events:
+        Signin:
+          Type: Api
+          Properties:
+            Path: /accounts
+            Method: get
 
 
 
