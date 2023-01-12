@@ -155,7 +155,7 @@ Resources:
         CreateAccount:
           Type: Api
           Properties:
-            Path: /accounts
+            Path: /addclient
             Method: get
       Environment:
         Variables:
