@@ -47,13 +47,13 @@ Parameters:
     Default: "dev-meal-planner"
   TestingPipelineExecutionRole:
     Type: String
-    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-meal-PipelineExecutionRole-1RZKLA58YTD14"
+    Default: "arn:aws:iam::378929686213:role/aws-sam-cli-managed-dev-pipe-PipelineExecutionRole-1RWX9EB3YYJLK"
   TestingCloudFormationExecutionRole:
     Type: String
-    Default: "arn:aws:iam::341014156608:role/aws-sam-cli-managed-dev-m-CloudFormationExecutionR-LJT4XNOA9IHP"
+    Default: "arn:aws:iam::378929686213:role/aws-sam-cli-managed-dev-p-CloudFormationExecutionR-1ML7Q6E2WV9Z3"
   TestingArtifactBucket:
     Type: String
-    Default: "aws-sam-cli-managed-dev-meal-plan-artifactsbucket-at57ob5xen5h"
+    Default: "aws-sam-cli-managed-dev-pipeline-artifactsbucket-17jte2emezjlw"
   TestingImageRepository:
     Type: String
     # If there are functions with "Image" PackageType in your template,

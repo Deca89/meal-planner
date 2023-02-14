@@ -22,3 +22,12 @@ cloudformation_execution_role = "arn:aws:iam::341014156608:role/aws-sam-cli-mana
 artifacts_bucket = "aws-sam-cli-managed-prod-meal-pla-artifactsbucket-1mln9f452s7ip"
 image_repository = ""
 region = "eu-west-1"
+
+[dev]
+[dev.pipeline_bootstrap]
+[dev.pipeline_bootstrap.parameters]
+pipeline_execution_role = "arn:aws:iam::378929686213:role/aws-sam-cli-managed-dev-pipe-PipelineExecutionRole-1RWX9EB3YYJLK"
+cloudformation_execution_role = "arn:aws:iam::378929686213:role/aws-sam-cli-managed-dev-p-CloudFormationExecutionR-1ML7Q6E2WV9Z3"
+artifacts_bucket = "aws-sam-cli-managed-dev-pipeline-artifactsbucket-17jte2emezjlw"
+image_repository = ""
+region = "eu-west-1"
