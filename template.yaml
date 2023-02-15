@@ -18,7 +18,7 @@ Globals:
 Parameters:
   Subemail: 
     Type: String
-    Default: nelli.ukkonen@brightstraining.com
+    Default: dennis.apter@digia.com
 
 Resources:
   MealPlannerDynamoDB: 
